@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Kalkulator Luas Futuristik</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            margin: 0;
+            background: linear-gradient(135deg, #6a11cb, #2575fc);
+            color: #fff;
+        }
+
+        .calculator {
+            background-color: rgba(255, 255, 255, 0.1);
+            border-radius: 15px;
+            padding: 30px;
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.3);
+            width: 400px;
+            backdrop-filter: blur(10px);
+        }
+
+        .calculator-header {
+            text-align: center;
+            margin-bottom: 25px;
+        }
+
+        .calculator-body {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .input-group {
+            margin-bottom: 20px;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: 600;
+        }
+
+        input[type="number"] {
+            width: calc(100% - 22px);
+            padding: 10px;
+            margin-bottom: 10px;
+            border: none;
+            border-radius: 5px;
+            background-color: rgba(255, 255, 255, 0.2);
+            color: #fff;
+            transition: background-color 0.3s ease;
+        }
+
+        input[type="number"]:focus {
+            background-color: rgba(255, 255, 255, 0.3);
+            outline: none;
+        }
+
+        .button-group {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 10px;
+        }
+
+        .calculate-button, .clear-button {
+            flex: 1;
+            padding: 12px 15px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+
+        .calculate-button {
+            background-color: #007bff;
+            color: #fff;
+            margin-right: 5px;
+        }
+
+        .clear-button {
+            background-color: #6c757d;
+            color: #fff;
+        }
+
+        .calculate-button:hover {
+            background-color: #0056b3;
+        }
+
+        .clear-button:hover {
+            background-color: #5a6268;
+        }
+
+        .result {
+            margin-top: 30px;
+            font-size: 1.2em;
+            font-weight: bold;
+            text-align: center;
+            background-color: rgba(255, 255, 255, 0.1);
+            padding: 15px;
+            border-radius: 8px;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="calculator">
+        <div class="calculator-header">
+            <h2>Tugas Kalkulator</h2>
+        </div>
+        <div class="calculator-body">
+            <div class="input-group">
+                <label for="panjangPersegiPanjang">Panjang:</label>
+                <input type="number" id="panjangPersegiPanjang">
+                <label for="lebarPersegiPanjang">Lebar:</label>
+                <input type="number" id="lebarPersegiPanjang">
+                <div class="button-group">
+                    <button class="calculate-button" onclick="hitungLuasPersegiPanjang()">Hitung</button>
+                    <button class="clear-button" onclick="hapusInput('panjangPersegiPanjang', 'lebarPersegiPanjang')">Hapus</button>
+                </div>
+            </div>
+
+            <div class="input-group">
+                <label for="sisiBujurSangkar">Sisi:</label>
+                <input type="number" id="sisiBujurSangkar">
+                <div class="button-group">
+                    <button class="calculate-button" onclick="hitungLuasBujurSangkar()">Hitung</button>
+                    <button class="clear-button" onclick="hapusInput('sisiBujurSangkar')">Hapus</button>
+                </div>
+            </div>
+
+            <div class="input-group">
+                <label for="alasSegitiga">Alas:</label>
+                <input type="number" id="alasSegitiga">
+                <label for="tinggiSegitiga">Tinggi:</label>
+                <input type="number" id="tinggiSegitiga">
+                <div class="button-group">
+                    <button class="calculate-button" onclick="hitungLuasSegitiga()">Hitung</button>
+                    <button class="clear-button" onclick="hapusInput('alasSegitiga', 'tinggiSegitiga')">Hapus</button>
+                </div>
+            </div>
+
+            <div id="hasil" class="result"></div>
+        </div>
+    </div>
+
+    <script>
+        function hitungLuasPersegiPanjang() {
+            let panjang = document.getElementById("panjangPersegiPanjang").value;
+            let lebar = document.getElementById("lebarPersegiPanjang").value;
+            let luas = panjang * lebar;
+            document.getElementById("hasil").innerHTML = "Luas Persegi Panjang: " + luas;
+        }
+
+        function hitungLuasBujurSangkar() {
+            let sisi = document.getElementById("sisiBujurSangkar").value;
+            let luas = sisi * sisi;
+            document.getElementById("hasil").innerHTML = "Luas Bujur Sangkar: " + luas;
+        }
+
+        function hitungLuasSegitiga() {
+            let alas = document.getElementById("alasSegitiga").value;
+            let tinggi = document.getElementById("tinggiSegitiga").value;
+            let luas = 0.5 * alas * tinggi;
+            document.getElementById("hasil").innerHTML = "Luas Segitiga: " + luas;
+        }
+
+        function hapusInput(...ids) {
+            ids.forEach(id => {
+                document.getElementById(id).value = "";
+            });
+        }
+    </script>
+
+</body>
+</html>
