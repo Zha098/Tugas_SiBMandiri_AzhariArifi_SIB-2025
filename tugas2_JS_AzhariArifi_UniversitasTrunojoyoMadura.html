@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Data Pegawai</title>
+<style>
+  /* CSS Internal */
+  body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background-color: #f4f4f4;
+    color: #333;
+    padding: 20px;
+  }
+  h2 {
+    text-align: center;
+    color: #007bff;
+    margin-bottom: 20px;
+  }
+  table {
+    width: 100%;
+    border-collapse: collapse;
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
+    background-color: #fff;
+    border-radius: 10px;
+    overflow: hidden;
+  }
+  th, td {
+    padding: 15px;
+    text-align: left;
+    border-bottom: 1px solid #eee;
+  }
+  th {
+    background-color: #007bff;
+    color: #fff;
+    font-weight: 600;
+  }
+  tr:hover {
+    background-color: #f9f9f9;
+  }
+  tfoot td {
+    font-weight: bold;
+    background-color: #e6f7ff;
+    text-align: right;
+  }
+</style>
+</head>
+<body>
+
+<h2>Data Pegawai</h2>
+
+<table id="tabelPegawai">
+  <thead>
+    <tr>
+      <th>Nama Pegawai</th>
+      <th>Umur</th>
+      <th>Jabatan</th>
+      <th>Status</th>
+      <th>Gaji Pokok</th>
+      <th>Tunjangan Jabatan</th>
+      <th>BPJS</th>
+      <th>Tunjangan Keluarga</th>
+      <th>Total Gaji</th>
+    </tr>
+  </thead>
+  <tbody id="dataPegawai">
+  </tbody>
+  <tfoot>
+    <tr>
+      <td colspan="8" style="text-align:right;">Total Gaji:</td>
+      <td id="totalGaji"></td>
+    </tr>
+  </tfoot>
+</table>
+
+<script>
+  // Data Pegawai
+  let dataPegawai = [
+    {
+      nama: "dodi prayodi",
+      umur: 25,
+      jabatan: "manajer",
+      status: "menikah",
+    },
+    {
+      nama: "siti nurhaliza",
+      umur: 30,
+      jabatan: "asisten manajer",
+      status: "menikah",
+    },
+    {
+      nama: "budi santoso",
+      umur: 28,
+      jabatan: "staff",
+      status: "belum menikah",
+    },
+    {
+      nama: "andi wijaya",
+      umur: 32,
+      jabatan: "asisten manajer",
+      status: "menikah",
+    },
+    {
+      nama: "dewi purnama",
+      umur: 24,
+      jabatan: "staff",
+      status: "belum menikah",
+    },
+  ];
+
+  let totalGajiSemuaPegawai = 0;
+
+  // Loop untuk setiap pegawai
+  for (let i = 0; i < dataPegawai.length; i++) {
+    let pegawai = dataPegawai[i];
+
+    // Gaji Pokok (if)
+    let gajiPokok;
+    if (pegawai.jabatan === "manajer") {
+      gajiPokok = 15000000;
+    } else if (pegawai.jabatan === "asisten manajer") {
+      gajiPokok = 10000000;
+    } else {
+      gajiPokok = 5000000;
+    }
+
+    // Tunjangan Jabatan (15% dari Gapok)
+    let tunjanganJabatan = 0.15 * gajiPokok;
+
+    // BPJS (10% dari Gapok)
+    let bpjs = 0.10 * gajiPokok;
+
+    // Tunjangan Keluarga (ternary, 20% dari Gapok jika menikah)
+    let tunjanganKeluarga = pegawai.status === "menikah" ? 0.20 * gajiPokok : 0;
+
+    // Total Gaji
+    let totalGaji = gajiPokok + tunjanganJabatan - bpjs + tunjanganKeluarga;
+    totalGajiSemuaPegawai += totalGaji;
+
+    // Tampilkan Data ke Tabel
+    let tabel = document.getElementById("dataPegawai");
+    let baris = tabel.insertRow();
+    let sel1 = baris.insertCell(0);
+    let sel2 = baris.insertCell(1);
+    let sel3 = baris.insertCell(2);
+    let sel4 = baris.insertCell(3);
+    let sel5 = baris.insertCell(4);
+    let sel6 = baris.insertCell(5);
+    let sel7 = baris.insertCell(6);
+    let sel8 = baris.insertCell(7);
+    let sel9 = baris.insertCell(8);
+
+    sel1.innerHTML = pegawai.nama;
+    sel2.innerHTML = pegawai.umur;
+    sel3.innerHTML = pegawai.jabatan;
+    sel4.innerHTML = pegawai.status;
+    sel5.innerHTML = gajiPokok.toLocaleString('id-ID', { style: 'currency', currency: 'IDR' });
+    sel6.innerHTML = tunjanganJabatan.toLocaleString('id-ID', { style: 'currency', currency: 'IDR' });
+    sel7.innerHTML = bpjs.toLocaleString('id-ID', { style: 'currency', currency: 'IDR' });
+    sel8.innerHTML = tunjanganKeluarga.toLocaleString('id-ID', { style: 'currency', currency: 'IDR' });
+    sel9.innerHTML = totalGaji.toLocaleString('id-ID', { style: 'currency', currency: 'IDR' });
+  }
+
+  // Tampilkan Total Gaji di tfoot
+  document.getElementById("totalGaji").innerHTML = totalGajiSemuaPegawai.toLocaleString('id-ID', { style: 'currency', currency: 'IDR' });
+</script>
+
+</body>
+</html>
