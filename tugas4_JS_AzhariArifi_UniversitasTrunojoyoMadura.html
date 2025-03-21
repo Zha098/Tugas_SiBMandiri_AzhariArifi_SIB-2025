@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Sistem Manajemen Transportasi</title>
+  <style>
+    body {
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      background-color: #f4f4f4;
+      margin: 0;
+      padding: 0;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+    h2 {
+      text-align: center;
+      color: #007bff;
+      margin-top: 20px;
+    }
+    #daftarPelanggan {
+      width: 80%;
+      max-width: 600px;
+      margin: 20px auto;
+      padding: 20px;
+      background-color: #fff;
+      border-radius: 8px;
+      box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    }
+    #daftarPelanggan div {
+      margin-bottom: 10px;
+      padding: 10px;
+      border-bottom: 1px solid #eee;
+    }
+    #daftarPelanggan div:last-child {
+      border-bottom: none;
+    }
+  </style>
+</head>
+<body>
+
+  <h2>Daftar Pelanggan Menyewa Kendaraan</h2>
+
+  <div id="daftarPelanggan"></div>
+
+  <script>
+    // Class Pelanggan
+    class Pelanggan {
+      constructor(nama, nomorTelepon) {
+        this.nama = nama;
+        this.nomorTelepon = nomorTelepon;
+        this.kendaraanDisewa = null;
+      }
+
+      sewaKendaraan(kendaraan) {
+        this.kendaraanDisewa = kendaraan;
+        console.log(`${this.nama} menyewa ${kendaraan}.`);
+      }
+    }
+
+    // Data Pelanggan
+    let daftarPelanggan = [];
+
+    // Fungsi untuk menambahkan pelanggan baru
+    function tambahPelanggan(nama, nomorTelepon) {
+      let pelangganBaru = new Pelanggan(nama, nomorTelepon);
+      daftarPelanggan.push(pelangganBaru);
+      console.log(`Pelanggan ${nama} berhasil ditambahkan.`);
+    }
+
+    // Fungsi untuk menampilkan daftar pelanggan yang sedang menyewa kendaraan
+    function tampilkanPelangganMenyewa() {
+      let daftarDiv = document.getElementById("daftarPelanggan");
+      daftarDiv.innerHTML = ""; 
+
+      daftarPelanggan.forEach((pelanggan) => {
+        if (pelanggan.kendaraanDisewa) {
+          let pelangganDiv = document.createElement("div");
+          pelangganDiv.textContent = `Nama: ${pelanggan.nama}, Telepon: ${pelanggan.nomorTelepon}, Kendaraan: ${pelanggan.kendaraanDisewa}`;
+          daftarDiv.appendChild(pelangganDiv);
+        }
+      });
+    }
+
+    // Contoh Penggunaan
+    tambahPelanggan("Budi", "08123456789");
+    tambahPelanggan("Siti", "08987654321");
+
+    let budi = daftarPelanggan[0];
+    let siti = daftarPelanggan[1];
+
+    budi.sewaKendaraan("Mobil Avanza");
+    siti.sewaKendaraan("Motor Honda Beat");
+
+    tampilkanPelangganMenyewa();
+  </script>
+
+</body>
+</html>
