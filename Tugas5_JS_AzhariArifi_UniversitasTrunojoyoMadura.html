@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Manajemen Produk Toko Online</title>
+</head>
+<body>
+
+  <h1>Daftar Produk</h1>
+  <ul id="daftarProduk"></ul>
+
+  <script>
+    // ** Data Produk **
+
+    let produkList = [
+      { id: 1, nama: "Laptop", harga: 12000000 },
+      { id: 2, nama: "Smartphone", harga: 5000000 },
+      { id: 3, nama: "Headphone", harga: 1500000 },
+      { id: 4, nama: "Smartwatch", harga: 2500000 },
+      { id: 5, nama: "Kamera", harga: 8000000 },
+    ];
+
+    const manajemenProduk = {
+      // ** Menambahkan Produk dengan Spread Operator **
+      tambahItem: function (id, nama, harga) {
+        const produkBaru = { id, nama, harga };
+        produkList = [...produkList, produkBaru];
+        this.tampilkanItem();
+      },
+
+      // ** Menghapus Produk dengan Rest Parameter **
+      hapusItem: function (id) {
+        produkList = produkList.filter((produk) => produk.id !== id);
+        this.tampilkanItem();
+      },
+
+      // ** Menampilkan Produk dengan Destructuring **
+      tampilkanItem: function () {
+        const daftarProduk = document.getElementById("daftarProduk");
+        daftarProduk.innerHTML = "";
+
+        produkList.forEach(({ id, nama, harga }) => {
+          const listItem = document.createElement("li");
+          listItem.textContent = `ID: ${id}, Nama: ${nama}, Harga: Rp ${harga}`;
+          daftarProduk.appendChild(listItem);
+        });
+      },
+    };
+
+    // Contoh penggunaan
+    manajemenProduk.tampilkanItem();
+    manajemenProduk.tambahItem(6, "Tablet", 7000000);
+    manajemenProduk.hapusItem(2);
+  </script>
+
+</body>
+</html>
