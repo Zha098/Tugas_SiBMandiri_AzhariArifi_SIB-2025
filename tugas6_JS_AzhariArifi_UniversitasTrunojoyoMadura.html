@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Tugas Pertemuan 6 J5</title>
+</head>
+<body>
+
+  <h1>Data Pengguna</h1>
+
+  <div id="daftarPengguna"></div>
+
+  <script>
+    // Data Pengguna (data.mjs)
+    const users = [
+      { nama: 'Data 1', umur: 20, alamat: 'Jl. Data 1', email: 'data1@example.com' },
+      { nama: 'Data 2', umur: 21, alamat: 'Jl. Data 2', email: 'data2@example.com' },
+      { nama: 'Data 3', umur: 22, alamat: 'Jl. Data 3', email: 'data3@example.com' },
+      { nama: 'Data 4', umur: 23, alamat: 'Jl. Data 4', email: 'data4@example.com' },
+      { nama: 'Data 5', umur: 24, alamat: 'Jl. Data 5', email: 'data5@example.com' },
+      { nama: 'Data 6', umur: 25, alamat: 'Jl. Data 6', email: 'data6@example.com' },
+      { nama: 'Data 7', umur: 26, alamat: 'Jl. Data 7', email: 'data7@example.com' },
+      { nama: 'Data 8', umur: 27, alamat: 'Jl. Data 8', email: 'data8@example.com' },
+      { nama: 'Data 9', umur: 28, alamat: 'Jl. Data 9', email: 'data9@example.com' },
+      { nama: 'Data 10', umur: 29, alamat: 'Jl. Data 10', email: 'data10@example.com' },
+      { nama: 'Data 11', umur: 30, alamat: 'Jl. Data 11', email: 'data11@example.com' },
+      { nama: 'Data 12', umur: 31, alamat: 'Jl. Data 12', email: 'data12@example.com' },
+      { nama: 'Data 13', umur: 32, alamat: 'Jl. Data 13', email: 'data13@example.com' },
+      { nama: 'Data 14', umur: 33, alamat: 'Jl. Data 14', email: 'data14@example.com' },
+      { nama: 'Data 15', umur: 34, alamat: 'Jl. Data 15', email: 'data15@example.com' },
+      { nama: 'Data 16', umur: 35, alamat: 'Jl. Data 16', email: 'data16@example.com' },
+      { nama: 'Data 17', umur: 36, alamat: 'Jl. Data 17', email: 'data17@example.com' },
+      { nama: 'Data 18', umur: 37, alamat: 'Jl. Data 18', email: 'data18@example.com' }
+    ];
+
+    // Controller (controller.mjs)
+    const index = () => {
+      let daftarDiv = document.getElementById('daftarPengguna');
+      daftarDiv.innerHTML = '<h2>Daftar Pengguna:</h2>';
+
+      users.map(user => {
+        daftarDiv.innerHTML += `<p>Nama: ${user.nama}, Umur: ${user.umur}, Alamat: ${user.alamat}, Email: ${user.email}</p>`;
+      });
+    };
+
+    const store = (user) => {
+      users.push(user);
+      alert(`Pengguna ${user.nama} berhasil ditambahkan.`);
+    };
+
+    const destroy = (nama) => {
+      const index = users.findIndex(user => user.nama === nama);
+      if (index !== -1) {
+        users.splice(index, 1);
+        alert(`Pengguna ${nama} berhasil dihapus.`);
+      } else {
+        alert(`Pengguna ${nama} tidak ditemukan.`);
+      }
+    };
+
+    const main = () => {
+      // Tambah dua data
+      store({ nama: 'Data Baru 1', umur: 38, alamat: 'Jl. Baru 1', email: 'baru1@example.com' });
+      store({ nama: 'Data Baru 2', umur: 39, alamat: 'Jl. Baru 2', email: 'baru2@example.com' });
+
+      // Tampilkan data
+      index();
+
+      // Hapus data
+      destroy('Data 5');
+      destroy('Data Baru 2');
+
+      // Tampilkan data setelah dihapus
+      index();
+    };
+
+    main();
+  </script>
+
+</body>
+</html> 
